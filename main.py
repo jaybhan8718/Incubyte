@@ -3,21 +3,39 @@ def add(numbers:str):
     if numbers == "": #handling empty string
         return sum
     else:
-        #handle new lines between numbers and also comma seperated value
-        if "\n" in numbers:
+        if numbers.startswith("\\") or numbers.startswith("//"): #handling custom delimiter
+            delimiter = numbers[1]
+            numbers= numbers[2:]
+            numbers = numbers.replace("\n", delimiter)
+            numbers = numbers.split(delimiter)
+        elif '\n' in numbers:
             numbers = numbers.split("\n")
         else:
             numbers = numbers.split(",")
+            
         for num in numbers:
-            if isinstance(num, str):
-                for n in num.split(","):
-                    sum += int(n)
-            else:
-                print(num)
-                sum += int(num)
+            if num!='':
+                if ',' in num:
+                    num = num.split(",")
+                    for n in num:
+                        sum += int(n)
+                else:
+                    sum += int(num) #converting string to int and adding to sum
+            
     return sum
 
-assert add("") == 0, "Test case failed: Expected 0 for empty string"
-assert add("1,2,3") == 6, "Test case failed: Expected 6 for '1,2,3'"
-assert add("1\n2,3") == 6, "Test case failed: Expected 6 for '1\\n2,3'"
-assert add("4\n5\n6") == 15, "Test case failed: Expected 15 for '4\\n5\\n6'"
+
+
+#Testcases
+def test_add():
+    assert add("") == 0, "Test case 1 failed"
+    assert add("1,2") == 3, "Test case 2 failed"
+    assert add("1\n2") == 3, "Test case 3 failed"
+    assert add("1,2\n3") == 6, "Test case 4 failed"
+    assert add("1\n2,3") == 6, "Test case 5 failed"
+    assert add("\\;\n1;2;3") == 6, "Test case 6 failed"
+    assert add("\\;\n1;2\n3") == 6, "Test case 7 failed"
+    print("All test cases pass")
+    
+    
+test_add()
