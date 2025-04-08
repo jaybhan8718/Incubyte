@@ -11,9 +11,6 @@ A basic Python implementation of a string calculator that supports custom delimi
 
 ## Usage
 
-```python
-from calculator import add
-
 print(add("1,2"))          # Output: 3
 print(add("1\n2,3"))       # Output: 6
 print(add("\\;\n1;2;3"))   # Output: 6
