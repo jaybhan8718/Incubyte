@@ -44,7 +44,7 @@ def test_add():
     assert add("1\n2,3") == 6, "Test case 5 failed"
     assert add("\\;\n1;2;3") == 6, "Test case 6 failed"
     assert add("\\;\n1;2\n3") == 6, "Test case 7 failed"
-    # assert add("\\;\n1;2\n3;-4;-5") == 6, "Test case 8 failed"
+    assert add("\\;\n1;2\n3;-4;-5") == 6, "Test case 8 failed"
     print("All test cases pass")
 
 test_add()
